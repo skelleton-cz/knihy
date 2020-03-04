@@ -1,0 +1,20 @@
+{block content}
+
+<h3>Seznam dostupných knih</h3>
+
+<table>
+    <tr>
+        <td> <strong>ID</strong> </td>
+        <td> <strong>Autor</strong> </td>
+        <td> <strong>Nazev</strong> </td>
+        <td> <strong>Rok vydání</strong> </td>
+    </tr>
+    <tr n:foreach="$knihy as $kniha">
+        <td> {$kniha->id} </td>
+        <td> {$kniha->autor->jmeno} {$kniha->autor->prijmeni} </td>
+        <td> {$kniha->nazev} </td>
+        <td> {$kniha->rokVydani} </td>
+    </tr>
+</table>
+
+<a n:href="Homepage:"> Zpět </a>
