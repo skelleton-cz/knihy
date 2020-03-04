@@ -7,13 +7,24 @@
 
 <div id="content">
 
-	<h2>Seznam autorů</h2>
+	<h3>Seznam autorů</h3>
 
-	{*
-		Zde bude tabulka se všemi autory
-	*}
+	<table>
+		<tr>
+			<td>ID</td>
+			<td>Jméno </td>
+			<td>Rok narození</td>
+			<td>Počet knih</td>
+		</tr>
+		<tr n:foreach="$autori as $autor">
+			<td> {$autor->id} </td>
+			<td> {$autor->jmeno} {$autor->prijmeni} </td>
+			<td> {$autor->rokNarozeni} </td>
+			<td> {count($knihy->where("autor_id", $autor->id))} </td>
+		</tr>
+	</table>
 	
-	<h2>Seznam dostupných knih</h2>
+	<h3>Seznam dostupných knih</h3>
 
 	<table>
 		<tr>

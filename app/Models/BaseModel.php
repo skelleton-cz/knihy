@@ -11,7 +11,7 @@ abstract class BaseModel
 
     /**
      * BaseModel constructor.
-     * @param \Nette\Database\Connection $database
+     * @param Database\Context $database
      */
     public function __construct(Database\Context $database)
     {
@@ -19,10 +19,18 @@ abstract class BaseModel
     }
 
     /**
- * @return Database\Table\Selection
- */
+     * @return Database\Table\Selection
+     */
     public function getTableKnihy()
     {
         return $this->db->table('knihy');
+    }
+
+    /**
+     * @return Database\Table\Selection
+     */
+    public function getTableAutori()
+    {
+        return $this->db->table('autor');
     }
 }
