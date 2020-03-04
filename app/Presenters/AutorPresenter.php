@@ -6,6 +6,7 @@ namespace App\Presenters;
 
 use Nette\Application\UI\Form;
 use Nette\Utils\ArrayHash;
+use Nette\Utils\DateTime;
 
 class AutorPresenter extends BasePresenter
 {
@@ -24,7 +25,7 @@ class AutorPresenter extends BasePresenter
             ->setRequired();
         $form->addText('prijmeni', 'Příjmení autora: ')
             ->setRequired();
-        $form->addInteger('rokNarozeni', 'Rok narození: ');
+        $form->addText('rokNarozeni', 'Rok narození: ');
         $form->addSubmit('save', "Uložit");
 
         $form->onSuccess[] = [$this, 'autorFormUlozit'];
@@ -34,7 +35,12 @@ class AutorPresenter extends BasePresenter
 
     public function autorFormUlozit(Form $form, ArrayHash $vals)
     {
-        dump($vals);
-        exit();
+        unset($vals->id);
+        $vals->rokNarozeni = new DateTime($vals->rokNarozeni);
+
+        $this->autoriModel->add($vals);
+
+        $this->presenter->flashMessage("Autor úspěšně založen");
+        $this->presenter->redirect('Autor:default');
     }
 }

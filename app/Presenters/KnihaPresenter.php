@@ -4,8 +4,10 @@
 namespace App\Presenters;
 
 
+use Cassandra\Date;
 use Nette\Application\UI\Form;
 use Nette\Utils\ArrayHash;
+use Nette\Utils\DateTime;
 
 class KnihaPresenter extends BasePresenter
 {
@@ -14,6 +16,7 @@ class KnihaPresenter extends BasePresenter
     public function renderDefault()
     {
         $this->template->knihy = $this->knihyModel->getSeznamKnih();
+        $this->template->autori = $this->autoriModel->getSeznamAutoru();
     }
 
     /**
@@ -43,8 +46,13 @@ class KnihaPresenter extends BasePresenter
 
     public function knihaFormUlozit(Form $form, ArrayHash $vals)
     {
-        dump($vals);
-        exit();
+        unset($vals->id);
+        $vals->rokVydani = new DateTime($vals->rokVydani);
+
+        $this->knihyModel->add($vals);
+
+        $this->presenter->flashMessage("Kniha úspěšně vytvořena");
+        $this->presenter->redirect('Kniha:default');
     }
 
 }

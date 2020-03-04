@@ -2,7 +2,7 @@
 
 <h3>Seznam dostupných knih</h3>
 
-<a n:href="Kniha:add"> Přidat novou knihu </a>
+<a n:href="Kniha:add" n:if="count($autori) > 0 ? disabled"> Přidat novou knihu </a>
 
 <br /><br />
 
@@ -17,7 +17,7 @@
         <td> {$kniha->id} </td>
         <td> {$kniha->autor->jmeno} {$kniha->autor->prijmeni} </td>
         <td> {$kniha->nazev} </td>
-        <td> {$kniha->rokVydani} </td>
+        <td> {$kniha->rokVydani|date:'Y'} </td>
     </tr>
 </table>
 

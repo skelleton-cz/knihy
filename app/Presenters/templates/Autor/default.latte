@@ -16,7 +16,7 @@
     <tr n:foreach="$autori as $autor">
         <td> {$autor->id} </td>
         <td> {$autor->jmeno} {$autor->prijmeni} </td>
-        <td> {$autor->rokNarozeni} </td>
+        <td> {$autor->rokNarozeni|date:'Y'} </td>
         <td> {count($knihy->where("autor_id", $autor->id))} </td>
     </tr>
 </table>
